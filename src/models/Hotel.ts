@@ -66,10 +66,14 @@ const hotelSchema = new Schema(
       default: false,
     },
 
+    // createdBy: {
+    //   type: String,
+    //   required: true,
+    // },
     createdBy: {
-      type: String,
-      required: true,
-    },
+  type: String,
+  default: "",
+},
   },
   {
     timestamps: true,
