@@ -1,16 +1,36 @@
-import { NextResponse } from "next/server";
-// import { connectDB } from "@/lib/mongodb";
+import { NextRequest, NextResponse } from "next/server";
 import Hotel from "@/models/Hotel";
 import { connectDB } from "@/lib/db";
 
 // GET All Hotels
-export async function GET() {
+// GET All Hotels
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
 
-    const hotels = await Hotel.find().sort({ createdAt: -1 });
+    const searchParams = request.nextUrl.searchParams;
 
-    return NextResponse.json(hotels, { status: 200 });
+    const featured = searchParams.get("featured");
+    const category = searchParams.get("category");
+    const location = searchParams.get("location");
+
+    const query: Record<string, unknown> = {};
+
+    if (featured === "true") {
+      query.featured = true;
+    }
+
+    if (category) {
+      query.category = category;
+    }
+
+    if (location) {
+      query.location = location;
+    }
+
+    const hotels = await Hotel.find(query).sort({ createdAt: -1 });
+
+    return NextResponse.json(hotels);
   } catch (error) {
     console.error("GET Hotels Error:", error);
 
@@ -20,7 +40,6 @@ export async function GET() {
     );
   }
 }
-
 // POST Hotel
 export async function POST(request: Request) {
   try {

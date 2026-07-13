@@ -18,7 +18,10 @@ export async function createHotel(data: HotelPayload) {
   const response = await axios.post("/api/hotels", data);
   return response.data;
 }
-
+export async function getFeaturedHotels() {
+  const response = await axios.get("/api/hotels?featured=true");
+  return response.data;
+}
 // Get All Hotels
 export async function getHotels() {
   const response = await axios.get("/api/hotels");

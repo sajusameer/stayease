@@ -1,7 +1,9 @@
-import Image from "next/image";
+import Hero from "@/components/home/Hero";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <h2 className="bg-amber-400 text-3xl">hlw world</h2>
+    <main>
+      <Hero />
+    </main>
   );
 }

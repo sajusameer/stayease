@@ -17,7 +17,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-lg">
+<nav className="sticky top-0 z-50 border-b border-base-200 bg-base-100/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
 
         {/* Logo */}
