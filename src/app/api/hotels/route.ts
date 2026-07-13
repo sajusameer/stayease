@@ -3,7 +3,6 @@ import Hotel from "@/models/Hotel";
 import { connectDB } from "@/lib/db";
 
 // GET All Hotels
-// GET All Hotels
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
@@ -28,44 +27,59 @@ export async function GET(request: NextRequest) {
       query.location = location;
     }
 
-    const hotels = await Hotel.find(query).sort({ createdAt: -1 });
+    const hotels = await Hotel.find(query).sort({
+      createdAt: -1,
+    });
 
     return NextResponse.json(hotels);
   } catch (error) {
     console.error("GET Hotels Error:", error);
 
     return NextResponse.json(
-      { message: "Failed to fetch hotels." },
-      { status: 500 }
+      {
+        message: "Failed to fetch hotels.",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }
+
 // POST Hotel
 export async function POST(request: Request) {
   try {
     await connectDB();
 
-    // const body = await request.json();
-
-    // const hotel = await Hotel.create(body);
     const body = await request.json();
 
-body.slug = body.title
-  .toLowerCase()
-  .trim()
-  .replace(/\s+/g, "-");
+    // Generate SEO-friendly slug
+    body.slug = body.title
+      .toLowerCase()
+      .trim()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
 
-body.createdBy = "";
+    // TODO: Replace with logged-in user id later
+    body.createdBy = "";
 
-const hotel = await Hotel.create(body);
+    const hotel = await Hotel.create(body);
 
-    return NextResponse.json(hotel, { status: 201 });
+    return NextResponse.json(hotel, {
+      status: 201,
+    });
   } catch (error) {
     console.error("POST Hotel Error:", error);
 
     return NextResponse.json(
-      { message: "Failed to create hotel." },
-      { status: 500 }
+      {
+        message: "Failed to create hotel.",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }
