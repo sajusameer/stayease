@@ -13,14 +13,14 @@ export default function HeroImage() {
       className="relative"
     >
       {/* Main Image */}
-      <div className="overflow-hidden rounded-[32px] shadow-2xl">
+      <div className="overflow-hidden rounded-[32px] shadow-2xl group">
         <Image
           src="/images/hero.jpg"
           alt="Luxury Hotel"
           width={700}
           height={700}
           priority
-          className="h-[650px] w-full object-cover"
+          className="h-[720px] w-full object-cover"
         />
       </div>
 
