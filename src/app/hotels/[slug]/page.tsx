@@ -10,6 +10,7 @@ import {
 // import { getHotel } from "@/services/hotel.service";
 import { getHotelBySlug } from "@/lib/hotel";
 import Container from "@/components/common/Container";
+import BookingForm from "@/components/booking/BookingForm";
 
 interface Props {
   params: Promise<{
@@ -139,9 +140,13 @@ const hotel = await getHotelBySlug(slug);
 
                 </div>
 
-                <button className="btn btn-primary btn-lg rounded-xl">
+                {/* <button className="btn btn-primary btn-lg rounded-xl">
                   Book Now
-                </button>
+                </button> */}
+                <BookingForm
+              hotelId={String(hotel._id)}
+              pricePerNight={hotel.pricePerNight}
+            />
 
               </div>
 
