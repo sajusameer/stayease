@@ -79,40 +79,76 @@
 //       </div>
 //     </section>
 //   );
-// }
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { auth } from "@/lib/auth";
-import AdminSidebar from "@/components/admin/AdminSidebar";
+// }  
+"use client";
 
-export default async function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Hotel,
+  CalendarDays,
+  Users,
+  PlusCircle,
+} from "lucide-react";
 
-  if (!session) {
-    redirect("/login");
-  }
+export default function AdminSidebar() {
+  const pathname = usePathname();
 
-  const role = (session.user as any).role;
-
-  if (role !== "admin") {
-    redirect("/dashboard");
-  }
+  const menus = [
+    {
+      name: "Dashboard",
+      href: "/admin",
+      icon: LayoutDashboard,
+    },
+    {
+      name: "Hotels",
+      href: "/admin/hotels",
+      icon: Hotel,
+    },
+    {
+      name: "Bookings",
+      href: "/admin/bookings",
+      icon: CalendarDays,
+    },
+    {
+      name: "Users",
+      href: "/admin/users",
+      icon: Users,
+    },
+    {
+      name: "Add Hotel",
+      href: "/hotels/add",
+       icon: PlusCircle,
+    },
+  ];
 
   return (
-    <section className="min-h-screen bg-slate-50">
-      <div className="mx-auto flex max-w-7xl">
-        <AdminSidebar />
+    <aside className="sticky top-0 h-screen w-72 border-r bg-white p-6">
+      <h2 className="mb-10 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-3xl font-bold text-transparent">
+        Admin Panel
+      </h2>
 
-        <main className="flex-1 p-8">
-          {children}
-        </main>
-      </div>
-    </section>
+      <nav className="space-y-2">
+        {menus.map((menu) => {
+          const Icon = menu.icon;
+
+          return (
+            <Link
+              key={menu.href}
+              href={menu.href}
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                pathname === menu.href
+                  ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              <Icon size={20} />
+              {menu.name}
+            </Link>
+          );
+        })}
+      </nav>
+    </aside>
   );
 }

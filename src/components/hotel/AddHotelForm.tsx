@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createHotel } from "@/services/hotel.service";
 import { toast } from "sonner";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "@/lib/auth-client";
 
 import {
   hotelSchema,
@@ -11,6 +14,22 @@ import {
 } from "@/lib/validations/hotel.schema";
 
 export default function AddHotelForm() {
+  const { data: session, isPending } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isPending) {
+      if (!session) {
+        router.replace("/login");
+      } else if ((session.user as any).role !== "admin") {
+        router.replace("/");
+      }
+    }
+  }, [session, isPending, router]);
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
   const {
     register,
     handleSubmit,

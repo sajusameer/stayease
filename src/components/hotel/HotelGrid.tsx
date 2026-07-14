@@ -20,7 +20,7 @@ export default function HotelGrid({ hotels }: HotelGridProps) {
   }
 
   return (
-    <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
       {hotels.map((hotel) => (
         <HotelCard
           key={hotel._id}

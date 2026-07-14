@@ -29,25 +29,55 @@ export default function LoginForm() {
   });
 
 
+  // const onSubmit = async (data: LoginFormData) => {
+  //   try {
+  //     const result = await signIn.email({
+  //       email: data.email,
+  //       password: data.password,
+  //     });
+
+  //     if (result.error) {
+  //       console.log(result.error.message);
+  //       return;
+  //     }
+  //       toast.success("Login successful!");
+  //     router.push("/");
+
+  //   } catch (error) {
+  //     console.log(error);
+  //      toast.error("Something went wrong!");
+  //   }
+  // };
   const onSubmit = async (data: LoginFormData) => {
-    try {
-      const result = await signIn.email({
-        email: data.email,
-        password: data.password,
-      });
+  try {
+    const result = await signIn.email({
+      email: data.email,
+      password: data.password,
+    });
 
-      if (result.error) {
-        console.log(result.error.message);
-        return;
-      }
-        toast.success("Login successful!");
-      router.push("/");
-
-    } catch (error) {
-      console.log(error);
-       toast.error("Something went wrong!");
+    if (result.error) {
+      console.log(result.error.message);
+      toast.error(result.error.message || "Invalid credentials");
+      return;
     }
-  };
+
+    toast.success("Login successful!");
+    
+    // Better Auth সেশন থেকে সরাসরি ইউজার রোল চেক করুন
+    // const role = result.data?.user?.role; 
+    const role = (result.data?.user as any)?.role;
+
+    if (role === "admin") {
+      router.push("/admin"); // অ্যাডমিন হলে অ্যাডমিন ড্যাশবোর্ডে যাবে
+    } else {
+      router.push("/dashboard"); // নরমাল ইউজার হলে ইউজার ড্যাশবোর্ডে যাবে
+    }
+
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong!");
+  }
+};
 
 
   return (
