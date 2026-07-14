@@ -111,11 +111,11 @@ export default function AdminSidebar() {
       href: "/admin/bookings",
       icon: CalendarDays,
     },
-    {
-      name: "Users",
-      href: "/admin/users",
-      icon: Users,
-    },
+    // {
+    //   name: "Users",
+    //   href: "/admin/users",
+    //   icon: Users,
+    // },
     {
       name: "Add Hotel",
       href: "/hotels/add",
