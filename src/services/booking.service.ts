@@ -76,3 +76,30 @@ export async function deleteBooking(id: string) {
   const response = await axios.delete(`/api/bookings/${id}`);
   return response.data;
 }
+// Get Booking By ID
+export async function getBookingById(id: string) {
+  const response = await axios.get(`/api/bookings/${id}`);
+  return response.data;
+}
+
+// Update Booking
+export async function updateBooking(
+  id: string,
+  data: {
+    status: "Pending" | "Confirmed" | "Cancelled";
+  }
+) {
+  const response = await axios.put(
+    `/api/bookings/${id}`,
+    data
+  );
+  return response.data;
+}
+
+// // Delete Booking
+// export async function deleteBooking(id: string) {
+//   const response = await axios.delete(
+//     `/api/bookings/${id}`
+//   );
+//   return response.data;
+// }
