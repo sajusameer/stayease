@@ -10,7 +10,8 @@ const bookingSchema = new Schema(
 
     userId: {
       type: String,
-      required: true,
+      // required: true,
+       default: "",
     },
 
     checkIn: {

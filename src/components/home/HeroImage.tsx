@@ -20,7 +20,7 @@ export default function HeroImage() {
           width={700}
           height={700}
           priority
-          className="h-[720px] w-full object-cover"
+          className="h-[650px] w-full object-cover"
         />
       </div>
 
