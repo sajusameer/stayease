@@ -464,9 +464,9 @@ export default function AddHotelForm() {
                 step="0.1"
                 min="1"
                 max="5"
-          {...register("pricePerNight", { valueAsNumber: true })} // ✅ এই অংশটি মাস্ট যোগ করুন
+          {...register("rating", { valueAsNumber: true })} // ✅ এই অংশটি মাস্ট যোগ করুন
           className="input input-bordered w-full text-slate-700"
-          placeholder="5000"
+          placeholder="4.5"
         />
               {errors.rating?.message && (
                 <p className="mt-1 text-sm text-red-500">{errors.rating.message}</p>
