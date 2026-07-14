@@ -105,3 +105,11 @@ export async function deleteHotel(id: string) {
   const response = await axios.delete(`/api/hotels/${id}`);
   return response.data;
 }
+
+export async function updateHotel(
+  id: string,
+  data: HotelPayload
+) {
+  const response = await axios.put(`/api/hotels/${id}`, data);
+  return response.data;
+}
