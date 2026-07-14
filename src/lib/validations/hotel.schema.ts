@@ -101,8 +101,10 @@ export const hotelSchema = z.object({
 
   // // ✅ স্কিমা থেকে default বাদ দিয়ে সরাসরি নাম্বার রাখা হয়েছে
   // rating: z.number().min(1).max(5),
-pricePerNight: z.coerce.number().min(1, "Price must be greater than 0"),
-  rating: z.coerce.number().min(1).max(5),
+// pricePerNight: z.coerce.number().min(1, "Price must be greater than 0"),
+// rating: z.coerce.number().min(1).max(5),
+pricePerNight: z.number().min(1, "Price must be greater than 0"),
+  rating: z.number().min(1).max(5),
   shortDescription: z
     .string()
     .min(10, "Short description is too short"),

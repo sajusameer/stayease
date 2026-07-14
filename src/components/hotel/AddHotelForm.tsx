@@ -431,12 +431,18 @@ export default function AddHotelForm() {
             {/* Price */}
             <div>
               <label className="mb-2 block font-medium text-slate-700">Price Per Night</label>
-              <input
+              {/* <input
                 type="number"
                 {...register("pricePerNight")}
                 className="input input-bordered w-full text-slate-700"
                 placeholder="5000"
-              />
+              /> */}
+              <input
+            type="number"
+            {...register("pricePerNight", { valueAsNumber: true })} // ✅ এই অংশটি মাস্ট যোগ করুন
+            className="input input-bordered w-full text-slate-700"
+            placeholder="5000"
+          />
               {errors.pricePerNight?.message && (
                 <p className="mt-1 text-sm text-red-500">{errors.pricePerNight.message}</p>
               )}
@@ -445,14 +451,23 @@ export default function AddHotelForm() {
             {/* Rating */}
             <div>
               <label className="mb-2 block font-medium text-slate-700">Rating</label>
-              <input
+              {/* <input
                 type="number"
                 step="0.1"
                 min="1"
                 max="5"
                 {...register("rating")}
                 className="input input-bordered w-full text-slate-700"
-              />
+              /> */}
+              <input
+           type="number"
+                step="0.1"
+                min="1"
+                max="5"
+          {...register("pricePerNight", { valueAsNumber: true })} // ✅ এই অংশটি মাস্ট যোগ করুন
+          className="input input-bordered w-full text-slate-700"
+          placeholder="5000"
+        />
               {errors.rating?.message && (
                 <p className="mt-1 text-sm text-red-500">{errors.rating.message}</p>
               )}
