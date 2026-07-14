@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pencil, Trash2, MapPin, Star } from "lucide-react";
 import { deleteHotel, getHotels } from "@/services/hotel.service";
+import HotelGridSkeleton from "@/components/hotel/HotelGridSkeleton";
 import { toast } from "sonner";
 
 interface Hotel {
@@ -60,13 +61,22 @@ export default function ManageHotelsPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="py-20 text-center text-lg">
-        Loading...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="py-20 text-center text-lg">
+  //       Loading...
+  //     </div>
+  //   );
+  // }
+ if (loading) {
+  return (
+    <section className="py-16">
+    
+        <HotelGridSkeleton />
+    
+    </section>
+  );
+}
 
   return (
     <section>
