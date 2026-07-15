@@ -363,7 +363,7 @@ export default function Footer() {
                   size={20}
                   className="text-sky-600"
                 />
-                <span>Dhaka, Bangladesh</span>
+                <span>Chattogram, Bangladesh</span>
               </div>
 
               <div className="flex items-center gap-3">
