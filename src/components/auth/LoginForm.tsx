@@ -79,6 +79,44 @@ export default function LoginForm() {
   }
 };
 
+// demo login
+const handleDemoLogin = async (
+  type: "admin" | "user"
+) => {
+  try {
+    const credentials =
+      type === "admin"
+        ? {
+            email: "admin@gmail.com",
+            password: "admin1234",
+          }
+        : {
+            email: "user@stayease.com",
+            password: "user1234",
+          };
+
+    const result = await signIn.email(credentials);
+
+    if (result.error) {
+      toast.error(result.error.message || "Demo login failed");
+      return;
+    }
+
+    toast.success("Login successful!");
+
+    const role = (result.data?.user as any)?.role;
+
+    if (role === "admin") {
+      router.push("/admin");
+    } else {
+      router.push("/dashboard");
+    }
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong!");
+  }
+};
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-cyan-50 px-4">
@@ -176,12 +214,31 @@ export default function LoginForm() {
 
 
           {/* Demo Login */}
-          <button
+          {/* <button
             type="button"
             className="btn btn-outline w-full rounded-xl"
           >
             Demo Login
-          </button>
+          </button> */} 
+          <div className="grid grid-cols-2 gap-3">
+
+  <button
+    type="button"
+    onClick={() => handleDemoLogin("admin")}
+    className="btn btn-outline rounded-xl"
+  >
+    Demo Admin
+  </button>
+
+  <button
+    type="button"
+    onClick={() => handleDemoLogin("user")}
+    className="btn btn-outline rounded-xl"
+  >
+    Demo User
+  </button>
+
+</div>
 
 
         </form>
