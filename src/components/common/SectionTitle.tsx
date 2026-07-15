@@ -14,7 +14,7 @@ export default function SectionTitle({
   return (
     <div className={center ? "text-center" : ""}>
       {badge && (
-        <span className="badge badge-primary badge-outline mb-3">
+        <span className="badge badge-primary badge-lg">
           {badge}
         </span>
       )}
